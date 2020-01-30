@@ -1,6 +1,21 @@
 const express = require('express');
 const  {gql, ApolloServer } = require('apollo-server-express');
 const PORT = process.env.PORT || 4000;
+const dotenv = require('dotenv');
+var mongoose = require('mongoose');
+
+// Configure environment variable 
+dotenv.config();
+
+// Connect to mongodb database
+mongoose.connect(process.env.MONGO_URI,
+{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+},
+(err) => {
+  console.log('connected', err ? err : true);
+})
 
 const typeDefs = gql`
   type Query {
