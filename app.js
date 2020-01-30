@@ -4,6 +4,9 @@ const PORT = process.env.PORT || 4000;
 const dotenv = require('dotenv');
 var mongoose = require('mongoose');
 
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
+
 // Configure environment variable 
 dotenv.config();
 
@@ -15,23 +18,14 @@ mongoose.connect(process.env.MONGO_URI,
 },
 (err) => {
   console.log('connected', err ? err : true);
-})
-
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "Hello World!"
-  }
-}
+});
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
+
+// middlewares
+app.use(express.json());
 
 server.applyMiddleware({ app, path: '/graphql'});
 
