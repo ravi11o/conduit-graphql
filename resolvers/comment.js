@@ -10,19 +10,30 @@ module.exports = {
       } catch (error) {
         throw error;
       }
+    },
+    singleComment: async (_, {id}) => {
+      try {
+        return await Comment.findById(id);
+      } catch (error) {
+        throw error;
+      }
     }
   },
   Mutation: {
     createComment: async (_, args) => {
       try {
-        return await Comment.create(args);
+        const comment = await Comment.create(args);
+        await Article.findByIdAndUpdate(comment.article, {$push: {comments: comment.id}});
+        return comment;
       } catch (error) {
         throw error;
       }
     },
     deleteComment: async (_, { id }) => {
       try {
-        return await Comment.findByIdAndDelete(id);
+        const comment = await Comment.findByIdAndDelete(id);
+        await Article.findByIdAndUpdate(comment.article, {$pull: {comments: comment.id}});
+        return comment;
       } catch (error) {
         throw error;
       }

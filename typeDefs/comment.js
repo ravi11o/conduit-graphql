@@ -3,6 +3,7 @@ const { gql } = require('apollo-server-express');
 module.exports = gql`
   extend type Query {
     comments(slug: String!):[Comment!]
+    singleComment(id: ID!):Comment!
   }
 
   extend type Mutation {

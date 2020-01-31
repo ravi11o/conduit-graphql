@@ -9,7 +9,11 @@ var articleSchema = new Schema({
   description: { type: String, required: true },
   body: { type: String, required: true },
   tagList: [String],
-  favoritesCount: { type: Number, default: 0 }
+  favoritesCount: { type: Number, default: 0 },
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 }, { timestamps: true });
 
 articleSchema.pre('save', function(next) {

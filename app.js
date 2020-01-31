@@ -32,5 +32,3 @@ server.applyMiddleware({ app, path: '/graphql'});
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}${server.graphqlPath}`);
 });
-
-// fix date, associate comment with article, singleComment
