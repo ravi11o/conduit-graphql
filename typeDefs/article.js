@@ -32,7 +32,8 @@ module.exports = gql`
     description: String!
     tagList: [String!]
     slug: String
-    createdAt: String
-    updatedAt: String
+    comments: [Comment!]
+    createdAt: Date!
+    updatedAt: Date!
   }
 `;

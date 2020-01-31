@@ -1,9 +1,12 @@
 const { gql } = require('apollo-server-express');
 const articleTypeDefs = require('./article');
+const commentTypeDefs = require('./comment');
 
 const typeDefs = gql`
+  scalar Date
+  
   type Query {
-    hello: String
+    _: String
   }
   type Mutation {
     _: String
@@ -12,5 +15,6 @@ const typeDefs = gql`
 
 module.exports = [
   typeDefs,
-  articleTypeDefs
+  articleTypeDefs,
+  commentTypeDefs
 ]

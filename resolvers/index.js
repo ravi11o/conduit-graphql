@@ -1,13 +1,15 @@
+const { GraphQLDateTime } = require('graphql-iso-date');
+
 const articleResolver = require('./article');
+const commentResolver = require('./comment');
 
 
-const indexResolver = {
-  Query: {
-    hello: () => "Hello World!"
-  }
+const customDateScalarResolver = {
+  Date: GraphQLDateTime
 }
 
 module.exports = [
-  indexResolver,
-  articleResolver
+  customDateScalarResolver,
+  articleResolver, 
+  commentResolver
 ]

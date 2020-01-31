@@ -1,4 +1,5 @@
 const Article = require('../models/article');
+const Comment = require('../models/comment');
 
 module.exports = {
   Query: {
@@ -45,6 +46,16 @@ module.exports = {
       try {
         const article = Article.findByIdAndDelete(args.id);
         return article;
+      } catch (error) {
+        throw error;
+      }
+    }
+  },
+  Article: {
+    comments: async (parent) => {
+      try {
+        const comments = await Comment.find({article: parent.id});
+        return comments;
       } catch (error) {
         throw error;
       }
