@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 const articleTypeDefs = require('./article');
 const commentTypeDefs = require('./comment');
+const userTypeDefs = require('./user');
 
 const typeDefs = gql`
   scalar Date
@@ -16,5 +17,6 @@ const typeDefs = gql`
 module.exports = [
   typeDefs,
   articleTypeDefs,
-  commentTypeDefs
+  commentTypeDefs,
+  userTypeDefs
 ]
