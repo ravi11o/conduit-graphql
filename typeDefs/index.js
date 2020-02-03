@@ -7,7 +7,7 @@ const typeDefs = gql`
   scalar Date
   
   type Query {
-    _: String
+    tags: [String!]
   }
   type Mutation {
     _: String

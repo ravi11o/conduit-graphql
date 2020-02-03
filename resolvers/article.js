@@ -11,10 +11,18 @@ module.exports = {
         throw err;
       }
     },
-    article: async(_, { slug }) => {
+    article: async (_, { slug }) => {
       try {
         const article = Article.findOne({ slug });
         return article;
+      } catch (error) {
+        throw error;
+      }
+    },
+    tags: async () => {
+      try {
+        const tags = await Article.distinct("tagList");
+        return tags;
       } catch (error) {
         throw error;
       }
