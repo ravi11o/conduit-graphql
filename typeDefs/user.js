@@ -1,6 +1,10 @@
 const { gql } = require('apollo-server-express');
 
 module.exports = gql`
+  extend type Query {
+    profile(username: String!):Profile
+  }
+
   extend type Mutation {
     register(input: registerUser): User!
     login(input: loginUser): User!
@@ -13,6 +17,12 @@ module.exports = gql`
     bio: String
     image: String
     token: String
+  }
+
+  type Profile {
+    username: String!
+    bio: String
+    image: String
   }
 
   input registerUser {

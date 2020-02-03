@@ -3,6 +3,16 @@ const auth = require('../modules/auth');
 
 
 module.exports = {
+  Query: {
+    profile: async (_, { username }) => {
+      try {
+        const user = await User.findOne({ username });
+        return user;
+      } catch (error) {
+        throw error;
+      }
+    }
+  },
   Mutation: {
     register: async (_, args) => {
       try {
