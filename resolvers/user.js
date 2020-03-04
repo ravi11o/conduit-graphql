@@ -66,6 +66,12 @@ module.exports = {
       } catch (error) {
         throw error;
       }
+    }),
+    followUser: combineResolvers(isAuthenticated, async (_, {username}, {id}) => {
+      const userToFollow = await User.findOne({username});
+      const currentUser = await User.findByIdAndUpdate(id, {$push: {followings: userToFollow.id}}, {new: true});
+      console.log(currentUser);
+      return userToFollow;
     })
   }
 }

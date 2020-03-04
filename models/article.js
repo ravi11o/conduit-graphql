@@ -10,6 +10,15 @@ var articleSchema = new Schema({
   body: { type: String, required: true },
   tagList: [String],
   favoritesCount: { type: Number, default: 0 },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  favourited: [{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }],
   comments: [{
     type: Schema.Types.ObjectId,
     ref: 'Comment'

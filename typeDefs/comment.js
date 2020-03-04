@@ -16,5 +16,6 @@ module.exports = gql`
     body: String!
     createdAt: Date!
     updatedAt: Date!
+    author: Profile!
   }
 `;

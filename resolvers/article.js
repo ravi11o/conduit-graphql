@@ -1,5 +1,8 @@
 const Article = require('../models/article');
 const Comment = require('../models/comment');
+const User = require('../models/user');
+const { combineResolvers } = require('graphql-resolvers')
+const { isAuthenticated } = require('./middleware')
 
 module.exports = {
   Query: {
@@ -29,14 +32,15 @@ module.exports = {
     }
   },
   Mutation: {
-    createArticle: async(_, args) => {
+    createArticle: combineResolvers(isAuthenticated, async(_, args, {id}) => {
       try {
+        args.input.author = id;
         const article = await Article.create(args.input);
         return article;
       } catch (error) {
         throw error;
       }
-    },
+    }),
     updateArticle: async(_, args) => {
       try {
         const { title, description, body } = args.input;
@@ -67,6 +71,10 @@ module.exports = {
       } catch (error) {
         throw error;
       }
+    },
+    author: async ({author}) => {
+      const user = await User.findById(author);
+      return user;
     }
   }
 }

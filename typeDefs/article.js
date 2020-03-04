@@ -35,5 +35,6 @@ module.exports = gql`
     comments: [Comment!]
     createdAt: Date!
     updatedAt: Date!
+    author: Profile!
   }
 `;

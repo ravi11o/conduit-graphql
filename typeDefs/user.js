@@ -10,6 +10,7 @@ module.exports = gql`
     register(input: registerUser): User!
     login(input: loginUser): User!
     updateUser(input: updateUserField): User!
+    followUser(username: String!):Profile!
   }
 
   type User {

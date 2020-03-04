@@ -9,7 +9,11 @@ var userSchema = new Schema({
   username: { type: String, unique: true },
   password: { type: String, required: true},
   bio: String,
-  image: String
+  image: String,
+  followings: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }, { timestamps: true });
 
 userSchema.pre('save', async function(next) {
