@@ -2,7 +2,9 @@ const express = require('express');
 const  {gql, ApolloServer } = require('apollo-server-express');
 const PORT = process.env.PORT || 4000;
 const dotenv = require('dotenv');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { verifyJWT } = require('./modules/auth');
+
 
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
@@ -20,7 +22,16 @@ mongoose.connect(process.env.MONGO_URI,
   console.log('connected', err ? err : true);
 });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer(
+  { 
+    typeDefs, 
+    resolvers,
+    context: async ({ req }) => {
+      await verifyJWT(req);
+      return req.user;
+    } 
+  }
+);
 
 const app = express();
 
