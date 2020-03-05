@@ -10,6 +10,8 @@ module.exports = gql`
     createArticle(input: createArticleInput!):Article
     updateArticle(slug: String!, input: updateArticleInput!):Article
     deleteArticle(id: ID!):Article
+    favouriteArticle(slug: String!):Article
+    unfavouriteArticle(slug: String!):Article
   }
 
   input createArticleInput {

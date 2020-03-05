@@ -41,7 +41,7 @@ module.exports = {
         throw error;
       }
     }),
-    updateArticle: async(_, args) => {
+    updateArticle: combineResolvers(isAuthenticated, async(_, args) => {
       try {
         const { title, description, body } = args.input;
         const article = await Article.findOne({slug: args.slug});
@@ -53,15 +53,23 @@ module.exports = {
       } catch (error) {
         throw error;
       }
-    },
-    deleteArticle: async(_, args) => {
+    }),
+    deleteArticle: combineResolvers(isAuthenticated, async(_, args) => {
       try {
         const article = Article.findByIdAndDelete(args.id);
         return article;
       } catch (error) {
         throw error;
       }
-    }
+    }),
+    favouriteArticle: combineResolvers(isAuthenticated, async (_, { slug }, {id}) => {
+      const article = Article.findOneAndUpdate({slug}, {$push: {favourited: id}}, {new: true});
+      return article;
+    }),
+    unfavouriteArticle: combineResolvers(isAuthenticated, async (_, { slug }, {id}) => {
+      const article = Article.findOneAndUpdate({slug}, {$pull: {favourited: id}}, {new: true});
+      return article;
+    })
   },
   Article: {
     comments: async (parent) => {

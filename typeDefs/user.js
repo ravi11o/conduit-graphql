@@ -11,6 +11,7 @@ module.exports = gql`
     login(input: loginUser): User!
     updateUser(input: updateUserField): User!
     followUser(username: String!):Profile!
+    unfollowUser(username: String!):Profile!
   }
 
   type User {
