@@ -13,7 +13,7 @@
   "dependencies": {
     "apollo-server-express": "^2.9.16",
     "bcryptjs": "^2.4.3",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "graphql-iso-date": "^3.6.1",
     "graphql-resolvers": "^0.3.3",
     "jsonwebtoken": "^8.5.1",
